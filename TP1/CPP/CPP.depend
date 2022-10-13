@@ -1,0 +1,62 @@
+# depslib dependency file v1.0
+1663159175 source:w:\my documents\lifapc\tp1\cpp\element.cpp
+	<cstdio>
+	"element.h"
+
+1663166313 "
+
+1663160559 w:\my documents\lifapc\tp1\cpp\element.h
+
+1663167595 source:w:\my documents\lifapc\tp1\cpp\liste.cpp
+	<iostream>
+	<cstdio>
+	"liste.h"
+
+1663168611 
+
+1663166313 w:\my documents\lifapc\tp1\cpp\liste.h
+	"element.h"
+
+1663168611 source:w:\my documents\lifapc\tp1\cpp\main.cpp
+	"element.h"
+	"liste.h"
+	<cstdio>
+
+1663159175 source:\\teraetu.univ-lyon1.fr\homeetu\p1107819\my documents\lifapc\tp1\cpp\element.cpp
+	<cstdio>
+	"element.h"
+
+1663160559 \\teraetu.univ-lyon1.fr\homeetu\p1107819\my documents\lifapc\tp1\cpp\element.h
+
+1663168656 source:\\teraetu.univ-lyon1.fr\homeetu\p1107819\my documents\lifapc\tp1\cpp\liste.cpp
+	<iostream>
+	<cstdio>
+	"liste.h"
+
+1663166313 \\teraetu.univ-lyon1.fr\homeetu\p1107819\my documents\lifapc\tp1\cpp\liste.h
+	"element.h"
+
+1663168611 source:\\teraetu.univ-lyon1.fr\homeetu\p1107819\my documents\lifapc\tp1\cpp\main.cpp
+	"element.h"
+	"liste.h"
+	<cstdio>
+
+1663159175 source:/home/etu/p1107819/My Documents/LIFAPC/TP1/CPP/element.cpp
+	<cstdio>
+	"element.h"
+
+1663160559 /home/etu/p1107819/My Documents/LIFAPC/TP1/CPP/element.h
+
+1663771218 source:/home/etu/p1107819/My Documents/LIFAPC/TP1/CPP/main.cpp
+	"element.h"
+	"liste.h"
+	<cstdio>
+
+1663763585 /home/etu/p1107819/My Documents/LIFAPC/TP1/CPP/liste.h
+	"element.h"
+
+1663772359 source:/home/etu/p1107819/My Documents/LIFAPC/TP1/CPP/Liste.cpp
+	<iostream>
+	<cstdio>
+	"liste.h"
+
