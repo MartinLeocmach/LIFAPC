@@ -9,7 +9,7 @@ class product
     private :
     key k;
     value v;
-    bool deleted;
+    bool is_deleted;
 
     public :
     //Constructeur

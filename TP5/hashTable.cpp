@@ -30,7 +30,7 @@ void hashTable::insertion (product *p)
     else
     {
         int i = hash(p->getKey(), taille);
-        while(this->tab[i]!=nullptr && !(p->isDeleted()) && compteur<taille)
+        while(this->tab[i]!=nullptr && !(tab[i]->isDeleted()) && compteur<taille)
         {   
             if(this->tab[i]->getKey()==p->getKey())
             {
@@ -40,8 +40,11 @@ void hashTable::insertion (product *p)
             compteur++;
             i = rehash(i, compteur+1, taille);
         }
-        tab[i]= p;
-        nbElem++;
+        if(compteur<taille)
+        {
+            tab[i]= p;
+            nbElem++;
+        }
     }
 }
 
@@ -49,7 +52,7 @@ bool hashTable::recherche (product *p)
 {
     int i = hash(p->getKey(), taille);
     int compteur = 0;
-    while (tab[i] !=nullptr && !(p->isDeleted()) && compteur<taille)
+    while (tab[i] !=nullptr && !(tab[i]->isDeleted()) && compteur<taille)
     {
         if (tab[i]->getKey() == p->getKey())
         {
@@ -99,7 +102,6 @@ void hashTable::afficheElement(key key)
         
         if (tab[i]->getKey() == key)
         {
-            printf("in if \n");
             printf("%u -> %f : %d rehachages\n", tab[i]->getKey(), tab[i]->getValue(), nbEssai);
             return;
         }

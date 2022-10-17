@@ -7,13 +7,13 @@ product::product(key key, value value)
 {
     k =key;
     v = value;
-    deleted = false;
+    is_deleted = false;
 }
 
 //Destructeur
 product::~product(void)
 {
-    deleted = true;
+    //is_deleted = true;
 }
 
 //Access key
@@ -32,14 +32,14 @@ value product::getValue()
 //return true si le produit a été retiré false sinon
 bool product::isDeleted()
 {
-    return deleted;
+    return is_deleted;
 }
 
 //Modification
 //delete le produit de la table
 void product::doDelete()
 {
-    deleted =true;
+    is_deleted =true;
 }
 
 void product::changeValue(value value)

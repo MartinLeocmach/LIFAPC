@@ -43,9 +43,7 @@ int main ()
     {
         printf("%d n'est pas dans la table\n", p->getKey());
     }
-    //hTable.afficheTable();
-    p = new product(51546, 45.454);
-    hTable.insertion(p);
+    hTable.afficheTable();
     hTable.afficheElement(51546);
     return 0;
 }
