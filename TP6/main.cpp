@@ -13,6 +13,11 @@ int main ()
     *a1 = a2;
     e2.change_value(3);
     a1->insertion (e2);
+    e2.change_value(11);
+    a1->insertion(e2);
     a1->affichePrefix();
+    a1->affichePostfix();
+    a1->afficheInfix();
+    a1->afficheEtat();
     return 0;
 }

@@ -9,6 +9,17 @@ class abr
         abr * fils_g;
         abr * fils_d;
 
+    
+        //sous-fonctions pour affichages :
+        //Prefixe
+        void affichePrefixRec();
+        //Postfixe
+        void affichePostfixRec();
+        //Infixe
+        void afficheInfixRec();
+        //Etat interne
+        void afficheEtatRec(int indentation);
+
     public :
         //Constructeurs 
         //par défaut
@@ -43,9 +54,14 @@ class abr
         bool recherche(Elem e);
 
         //affichages :
-        //infixe
+        //Prefixe
         void affichePrefix();
-
+        //Postfixe
+        void affichePostfix();
+        //Infixe
+        void afficheInfix();
+        //etat interne de l'arbre (affichage graphique)
+        void afficheEtat();
 
 };
 
