@@ -1,243 +1,76 @@
-#include <cstdio> 
+#include <cstdio>
 #include "abrecherche.h"
-#include "math.h"
 
 abr::abr()
 {
-    val = 0;
-    fils_d = nullptr;
-    fils_g = nullptr;
+    this->racine = new noeud();
 }
 
 abr::abr(Elem e)
 {
-    val = e;
-    fils_d = nullptr;
-    fils_g = nullptr;
+    this->racine = new noeud(e);
 }
 
 abr::abr(abr *a)
 {
-    val = a->val;
-    if(a->fils_g !=nullptr)
-    {
-        fils_g = new abr (a->fils_g);
-    }
-    else
-    {
-        fils_g = nullptr;
-    }
-
-    if(a->fils_d != nullptr)
-    {
-        fils_d = new abr (a->fils_d);
-    }
-    else
-    {
-        fils_d = nullptr;
-    }
+    this->racine = new noeud (a->racine);
 }
 
 abr::~abr()
 {
-    delete fils_d;
-    delete fils_g;
+    delete racine;
 }
-
 
 void abr::operator=(abr *a)
 {
-    val= a->val;
-    delete fils_g;
-    delete fils_d;
-    if (a->fils_g !=nullptr)
-    {
-        fils_g = new abr (a->fils_g);
-    }
-    if (a->fils_d !=nullptr)
-    {
-        fils_d = new abr (a->fils_d);
-    }
+    this->racine=a->racine;
 }
 
-void abr::insertion(Elem e)
+void abr::insertion (Elem e)
 {
-    if (e < val)
-    {
-        if (fils_g==nullptr)
-        {
-            fils_g = new abr(e);
-        }
-        else
-        {
-            fils_g->insertion(e);
-        }
-    }
-    else if (val < e)
-    {
-        if (fils_d==nullptr)
-        {
-            fils_d = new abr(e);
-        }
-        else
-        {
-            fils_d->insertion(e);
-        }
-    }
+    this->racine->insertion(e);
 }
 
-bool abr::recherche(Elem e)
+bool abr::recherche (Elem e)
 {
-    if (e < val)
-    {
-        if (fils_g == nullptr)
-        {
-            return false;
-        }
-        else
-        {
-            return fils_g->recherche(e);
-        }
-    }
-    else if (val < e)
-    {
-        if (fils_d == nullptr)
-        {
-            return false;
-        }
-        else
-        {
-            return fils_d->recherche(e);
-        }
-    }
-    return true;
-}
-
-void abr::affichePrefixRec()
-{
-    printf("%d ", this->val.getValue());
-    if(fils_g !=nullptr)
-    {
-        fils_g->affichePrefixRec();
-    }
-    if(fils_d !=nullptr)
-    {
-        fils_d->affichePrefixRec();
-    }
+    return this->racine->recherche(e);
 }
 
 void abr::affichePrefix()
 {
-    this->affichePrefixRec();
+    this->racine->affichePrefixRec();
     printf ("\n");
-}
-
-void abr::affichePostfixRec()
-{
-    if(fils_g !=nullptr)
-    {
-        fils_g->affichePostfixRec();
-    }
-    if(fils_d !=nullptr)
-    {
-        fils_d->affichePostfixRec();
-    }
-    printf("%d ", this->val.getValue());
 }
 
 void abr::affichePostfix()
 {
-    this->affichePostfixRec();
+    this->racine->affichePostfixRec();
     printf("\n");
-}
-
-void abr::afficheInfixRec()
-{
-    if(fils_g !=nullptr)
-    {
-        fils_g->afficheInfixRec();
-    }
-    printf("%d ", this->val.getValue());
-    if(fils_d !=nullptr)
-    {
-        fils_d->afficheInfixRec();
-    }
 }
 
 void abr::afficheInfix()
 {
-    this->afficheInfixRec();
+    this->racine->afficheInfixRec();
     printf ("\n");
 }
 
-void abr::afficheEtatRec(int indentation)
+void abr::coudre()
 {
-    int i, stocknumBit;
-    int numBit = 64;
-    if(fils_g !=nullptr)
+    noeud *min = racine;
+    while (min != nullptr)
     {
-        fils_g->afficheEtatRec(indentation*2);
+        min = min->getFils_g();
     }
-    //printf("౹");
-    while (pow(2, numBit-1) > indentation)
-    {
-        numBit= numBit/2;
-    }
-    stocknumBit= numBit;
-    //printf("numBit = %d", stocknumBit);
-    i=indentation;
-        if (i%2 == 0)
-        {
-            for (numBit=stocknumBit; numBit>1; numBit=numBit/2)
-            {
-                if ((indentation/int(pow(2, numBit-1)))%2==1)
-                {
-                    printf ("|  ");
-                }
-                else
-                {
-                    printf("   ");
-                }
-            }
-        }
-        else
-        {
-            for (numBit=stocknumBit; numBit>1; numBit=numBit/2)
-            {
-                //printf("numBit = %d", numBit);
-                if ((indentation/int(pow(2, numBit-1)))%2==0)
-                {
-                    printf ("|  ");
-                }
-                else
-                {
-                    printf("   ");
-                }
-            }
-        }
-    if (indentation%2 == 0)
-    {
-        printf("╭%d\n", this->val.getValue());
-    }
-    if (indentation%2 == 1)
-    {
-        printf("╰%d\n", this->val.getValue());
-    }
-    if(fils_d !=nullptr)
-    {
-        fils_d->afficheEtatRec((indentation*2)+1);
-    }
+    this->minimum = min;
+    racine->coudreRec(nullptr);
 }
 
-void abr::afficheEtat()
+void abr::afficheCousu()
 {
-    if (fils_g != nullptr)
+    noeud * curseur = minimum;
+    bool remonte = false;
+    while (minimum->getFils_g() != nullptr)
     {
-        this->fils_g->afficheEtatRec(2);
     }
-    printf("%d\n", this->val.getValue());
-    if (fils_d != nullptr)
-    {
-        this->fils_d->afficheEtatRec(3);
-    }
+
 }

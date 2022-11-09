@@ -11,12 +11,10 @@ class Elem
     Elem(int n);
 
     ~Elem();
-
+    void operator= (int n);
     bool operator<(Elem e);
     int getValue ();
-
     void affichageElement();
-    void change_value(int n);
 };
 
 #endif

@@ -1,68 +1,51 @@
-#ifndef _ARBREBINAIRERECHERCHE
-#define _ARBREBINAIRERECHERCHE
-#include "element.h"
+#ifndef _ARBREBR
+#define _ARBREBR
+#include "noeud.h"
 
 class abr
 {
     private :
-        Elem val;
-        abr * fils_g;
-        abr * fils_d;
-
-    
-        //sous-fonctions pour affichages :
-        //Prefixe
-        void affichePrefixRec();
-        //Postfixe
-        void affichePostfixRec();
-        //Infixe
-        void afficheInfixRec();
-        //Etat interne
-        void afficheEtatRec(int indentation);
+    noeud * racine;
+    noeud * minimum;
 
     public :
-        //Constructeurs 
-        //par défaut
-        //post-condtions : les fils sont nullptr, val=0
-        abr();
-        //post-condtions : les fils sont nullptr, val = e
-        abr(Elem e);
-        //par copie profonde
-        //pre-condition : a initialisé
-        //post-condition this est une copie profonde de *a
-        abr(abr *a);
+    //Constructeurs
+    //Par défaut this vide
+    abr();
 
+    //avec un élément e dans le noeud racine
+    abr(Elem e);
 
-        //Destructeur
-        ~abr();
+    //Par copie profonde de a
+    abr(abr *a);
 
+    ~abr();
 
-        //Accesseurs
-        Elem getValue();
-        abr * getFils_g();
-        abr * getFils_d();
+    //accesseurs
+    noeud * getRacine();
 
-        //Surcharge de l'affectation
-        void operator= (abr *a);
+    
+    //Surcharge de l'affectation
+    void operator= (abr *a);
 
-        //insertion d'un Elem dans l'abr
-        void insertion(Elem e);
+    void insertion (Elem e);
 
-        //recherche
-        //precondition : this et e initialisé
-        //postcondition : retourne vrai si e est dans a, faux sinon
-        bool recherche(Elem e);
+    //recherche
+    //precondition : this et e initialisé
+    //postcondition : retourne vrai si e est dans a, faux sinon
+    bool recherche(Elem e);
 
-        //affichages :
-        //Prefixe
-        void affichePrefix();
-        //Postfixe
-        void affichePostfix();
-        //Infixe
-        void afficheInfix();
-        //etat interne de l'arbre (affichage graphique)
-        void afficheEtat();
+    //affichages :
+    //Prefixe
+    void affichePrefix();
+    //Postfixe
+    void affichePostfix();
+    //Infixe
+    void afficheInfix();
 
+    //Couture de l'arbre
+    void coudre();
+    //affichage infixe arbre cousu
+    void afficheCousu();
 };
-
 #endif

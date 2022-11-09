@@ -18,6 +18,11 @@ Elem::~Elem ()
 
 }
 
+void Elem::operator=(int n)
+{
+    this->entier = n;
+}
+
 bool Elem::operator<(Elem e)
 {
   return(this->entier < e.entier);
@@ -30,9 +35,4 @@ void Elem::affichageElement()
 int Elem::getValue()
 {
   return entier;
-}
-
-void Elem::change_value(int n)
-{
-  entier = n;
 }
