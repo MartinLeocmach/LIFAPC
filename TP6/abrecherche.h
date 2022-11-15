@@ -47,5 +47,7 @@ class abr
     void coudre();
     //affichage infixe arbre cousu
     void afficheCousu();
+    //insertion dans un arbre cousu
+    void insertionCousu(Elem e);
 };
 #endif

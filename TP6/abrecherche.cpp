@@ -3,16 +3,19 @@
 
 abr::abr()
 {
-    this->racine = new noeud();
+    this->racine = nullptr;
+    minimum = nullptr;
 }
 
 abr::abr(Elem e)
 {
     this->racine = new noeud(e);
+    minimum = nullptr;
 }
 
 abr::abr(abr *a)
 {
+    minimum = a->minimum;
     this->racine = new noeud (a->racine);
 }
 
@@ -21,6 +24,7 @@ abr::~abr()
     delete racine;
 }
 
+
 void abr::operator=(abr *a)
 {
     this->racine=a->racine;
@@ -28,7 +32,14 @@ void abr::operator=(abr *a)
 
 void abr::insertion (Elem e)
 {
-    this->racine->insertion(e);
+    if(racine !=nullptr)
+    {
+        this->racine->insertion(e);
+    }
+    else
+    {
+        racine = new noeud(e);
+    }
 }
 
 bool abr::recherche (Elem e)
@@ -57,20 +68,64 @@ void abr::afficheInfix()
 void abr::coudre()
 {
     noeud *min = racine;
-    while (min != nullptr)
+    if (racine == nullptr)
     {
-        min = min->getFils_g();
+        minimum = nullptr;
     }
-    this->minimum = min;
-    racine->coudreRec(nullptr);
+    else
+    {
+        while (min->getFils_g() != nullptr)
+        {
+            min = min->getFils_g();
+        }
+        this->minimum = min;
+        racine->coudreRec(nullptr);
+    }
 }
 
 void abr::afficheCousu()
 {
     noeud * curseur = minimum;
     bool remonte = false;
-    while (minimum->getFils_g() != nullptr)
+    while (curseur->getFils_d() != nullptr || (curseur->getFils_g() != nullptr && !remonte))
     {
+        if (remonte || curseur->getFils_g()==nullptr)
+        {
+            curseur->getValue().affichageElement();
+            if (curseur->isCoutured())
+            {
+                remonte = true;
+            }
+            else
+            {
+                remonte = false;
+            }
+            curseur = curseur->getFils_d();
+        }
+        else
+        {
+            curseur = curseur->getFils_g();
+            remonte = false;
+        }
+    }
+    curseur->getValue().affichageElement();
+    printf("\n");
+}
+
+void abr::insertionCousu(Elem e)
+{
+    if (racine != nullptr)
+    {
+        racine->insertionCousu(e);
+        if (e < minimum->getValue())
+        {
+            minimum = minimum->getFils_g();
+        }
+    }
+    else
+    {
+        racine = new noeud(e);
+        minimum = racine;
     }
 
 }

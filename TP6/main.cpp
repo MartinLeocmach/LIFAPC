@@ -60,12 +60,26 @@ int main ()
     a1->insertion(e1);
     e1 = 15;
     a1->insertion(e1);
+    e1 = 19;
+    a1->insertion(e1);
+    printf("affichage préfixe\n");
     a1->affichePrefix();
+    printf("affichage infixe\n");
     a1->afficheInfix();
+    printf("affichage postfixe\n");
     a1->affichePostfix();
     a1->coudre();
     //a1->affichePrefix();
+    printf("affichage infixe après couture\n");
     a1->afficheInfix();
     //a1->affichePostfix();
+    printf("affichage infixe itératif\n");
+    a1->afficheCousu();
+    e1 = 22;
+    a1->insertionCousu(e1);
+    e1 = 18;
+    a1->insertionCousu(e1);
+    printf("affichage infixe itératif\n");
+    a1->afficheCousu();
     return 0;
 }

@@ -35,6 +35,7 @@ class noeud
         Elem getValue();
         noeud * getFils_g();
         noeud * getFils_d();
+        bool isCoutured();
 
         //Surcharge de l'affectation
         void operator= (noeud *a);
@@ -67,8 +68,8 @@ class noeud
 
         //Couture du sous-arbre
         void coudreRec(noeud* dernierGauche);
-        //affichage noeud cousu
-        //void afficheCousuRec();
+        //Insertion dans le sous-arbre cousu
+        void insertionCousu(Elem e);
 };
 
 #endif

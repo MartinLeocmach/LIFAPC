@@ -21,7 +21,7 @@ noeud::noeud(Elem e)
 noeud::noeud(noeud *a)
 {
     val = a->val;
-    coutured = false;
+    coutured = a->coutured;
     if(a->fils_g !=nullptr)
     {
         fils_g = new noeud (a->fils_g);
@@ -60,6 +60,11 @@ noeud * noeud::getFils_g()
 noeud * noeud::getFils_d()
 {
     return fils_d;
+}
+
+bool noeud::isCoutured()
+{
+    return coutured;
 }
 
 void noeud::operator=(noeud *a)
@@ -260,5 +265,45 @@ void noeud::coudreRec(noeud* dernierGauche)
     {
         fils_d = dernierGauche;
         coutured = true;
+    }
+}
+
+void noeud::insertionCousu(Elem e)
+{
+    noeud* temp;
+    if (e < val)
+    {
+        if (fils_g==nullptr)
+        {
+            fils_g = new noeud(e);
+            fils_g->coutured=true;
+            fils_g->fils_d = this;
+        }
+        else
+        {
+            fils_g->insertionCousu(e);
+        }
+    }
+    else if (val < e)
+    {
+        if (fils_d==nullptr)
+        {
+            fils_d = new noeud(e);
+        }
+        else
+        {
+            if (coutured)
+            {
+                temp = new noeud(e);
+                temp->coutured = true;
+                temp->fils_d = fils_d;
+                fils_d = temp;
+                coutured = false;
+            }
+            else
+            {
+                fils_d->insertionCousu(e);
+            }
+        }
     }
 }
