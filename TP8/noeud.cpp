@@ -100,52 +100,86 @@ void noeud::operator=(noeud *a)
     }
 }
 
-
-noeud* noeud::insertion(Elem e)
+bool noeud::checkDesequilibre()
 {
-    noeud* desequilibre;
-    if (e < val)
+    if (abs(fils_g->getHauteur() - fils_d->getHauteur())> 1)
     {
-        if (fils_g==nullptr)
+        return true;
+    }
+    return false;
+}
+
+void noeud::majHauteur()
+{
+    hauteur = std::max(fils_d->getHauteur(), fils_g->getHauteur())+1;
+}
+
+
+noeud** noeud::insertion(Elem e)
+{
+    noeud ** desequilibre;
+    if(e.getValue()==val.getValue())
+    {
+        e.affichageElement();
+        printf(" est déjà dans l'arbre\n");
+        return nullptr;
+    }
+    if (e<val)
+    {
+        if (fils_g) //si fils_g n'est pas nullptr appel récursif dessus
         {
-            fils_g = new noeud(e);
-            if (hauteur==1)
-            {
-                hauteur++;
-            }
-            return nullptr;
-        }
-        else
-        {
-            //Pas bon a modifier
             desequilibre = fils_g->insertion(e);
-            hauteur = std::max(fils_g->getHauteur(), fils_d->getHauteur())+1;
-            if(!desequilibre)
+            if (desequilibre)
             {
-                if (abs(fils_g->getHauteur() - fils_d->getHauteur()) > 1)
-                {
-                    return this;
-                }
-            }
-            else {
                 return desequilibre;
             }
-        }
-    }
-    else if (val < e)
-    {
-        if (fils_d==nullptr)
-        {
-            fils_d = new noeud(e);
-            if (hauteur==1)
+            else
             {
-                hauteur++;
+                if (fils_g->checkDesequilibre())
+                {
+                    return &fils_g;
+                }
+                else
+                {
+                    fils_g->majHauteur();
+                    return nullptr;
+                }
             }
         }
-        else
+        else 
+        {
+            fils_g = new noeud(e);
+            majHauteur();
+            return nullptr;
+        }
+    }
+    else 
+    {
+        if (fils_d) //si fils_d n'est pas nullptr appel récursif dessus
         {
             desequilibre = fils_d->insertion(e);
-            
+            if (desequilibre)
+            {
+                return desequilibre;
+            }
+            else
+            {
+                if (fils_d->checkDesequilibre())
+                {
+                    return &fils_d;
+                }
+                else
+                {
+                    fils_d->majHauteur();
+                    return nullptr;
+                }
+            }
+        }
+        else 
+        {
+            fils_d = new noeud(e);
+            majHauteur();
+            return nullptr;
         }
     }
 }
@@ -180,11 +214,11 @@ bool noeud::recherche(Elem e)
 void noeud::affichePrefixRec()
 {
     printf("%d ", this->val.getValue());
-    if(fils_g !=nullptr)
+    if(fils_g)
     {
         fils_g->affichePrefixRec();
     }
-    if(fils_d !=nullptr)
+    if(fils_d)
     {
         fils_d->affichePrefixRec();
     }
@@ -217,6 +251,32 @@ void noeud::afficheInfixRec()
     {
         fils_d->afficheInfixRec();
     }
+}
+
+void noeud::afficheInfixHauteurRec()
+{
+    if(fils_g !=nullptr)
+    {
+        fils_g->afficheInfixHauteurRec();
+    }
+    printf("%d hauteur %d\n", this->val.getValue(), this->getHauteur());
+    if(fils_d !=nullptr)
+    {
+        fils_d->afficheInfixHauteurRec();
+    }
+}
+
+void noeud::affichePostfixHauteurRec()
+{
+    if(fils_g !=nullptr)
+    {
+        fils_g->affichePostfixHauteurRec();
+    }
+    if(fils_d !=nullptr)
+    {
+        fils_d->affichePostfixHauteurRec();
+    }
+    printf("%d hauteur %d\n", this->val.getValue(), this->getHauteur());
 }
 
 

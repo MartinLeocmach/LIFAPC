@@ -7,6 +7,13 @@ class AVL
     private :
     noeud * racine;
 
+    //rotation pour equilibrage après insertion
+    void rotationGauche(noeud** &pN);
+    void rotationDroite(noeud** &pN);
+    void rotationDoubleGauche(noeud** &pN);
+    void rotationDoubleDroite(noeud** &pN);
+
+
     public :
     //Constructeurs
     //Par défaut this vide
@@ -34,10 +41,6 @@ class AVL
     //postcondition : retourne vrai si e est dans a, faux sinon
     bool recherche(Elem e);
 
-    void rotationGauche(noeud* &pN);
-    void rotationDroite(noeud* &pN);
-    void rotationDoubleGauche(noeud* &pN);
-    void rotationDoubleDroite(noeud* &pN);
     //affichages :
     //Prefixe
     void affichePrefix();
@@ -45,6 +48,9 @@ class AVL
     void affichePostfix();
     //Infixe
     void afficheInfix();
-
+    //Postfixe + hauteur noeud
+    void affichePostfixHauteur();
+    //Infixe + hauteur noeud
+    void afficheInfixHauteur();
 };
 #endif

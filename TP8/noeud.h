@@ -10,7 +10,6 @@ class noeud
         noeud * fils_g;
         noeud * fils_d;
 
-        
 
     public :
         //Constructeurs 
@@ -46,7 +45,11 @@ class noeud
         //postcondition : retourne vrai si e est dans a, faux sinon
         bool recherche(Elem e);
 
-        noeud* insertion(Elem e);
+        void majHauteur();
+        bool checkDesequilibre();
+        //Precondition : this est un sous-arbre AVL (équilibré)
+        //Post-condition : e inséré, retourne le noeud déséquilibré le plus bas pour rééquilibre
+        noeud** insertion(Elem e);
 
         //affichages :
         //Prefixe
@@ -55,6 +58,8 @@ class noeud
         void affichePostfix();
         //Infixe
         void afficheInfix();
+        //Infixe + affiche hauteur noeud
+        void afficheInfixHauteur();
         //etat interne de l'arbre (affichage graphique)
         void afficheEtat();
 
@@ -65,6 +70,10 @@ class noeud
         void affichePostfixRec();
         //Infixe
         void afficheInfixRec();
+        //Postfixe + affiche hauteur noeud
+        void affichePostfixHauteurRec();
+        //Infixe + affiche hauteur noeud
+        void afficheInfixHauteurRec();
         //Etat interne
         void afficheEtatRec(int indentation);
 
